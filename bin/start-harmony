@@ -1,0 +1,6 @@
+#!/bin/bash
+
+source /root/.nvm/nvm.sh;
+cd /harmony
+nvm install && nvm use && npm install
+npm run start-dev

@@ -1,0 +1,40 @@
+#!/bin/bash
+
+kubectl run harmony --image-pull-policy=IfNotPresent --image=harmony:latest --port=3000 --overrides='
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "harmony"
+  },
+  "spec": {
+    "template": {
+      "spec": {
+        "containers": [
+          {
+            "name": "harmony",
+            "image": "harmony:latest",
+            "args": [
+              "/bin/bash"
+            ],
+            "stdin": true,
+            "stdinOnce": true,
+            "tty": true,
+            "volumeMounts": [{
+              "mountPath": "/harm ony",
+              "name": "store"
+            }]
+          }
+        ],
+        "volumes": [{
+          "name":"store",
+          "hostPath":{
+            "path": "/Users/jnorton1/Harmoy/harmony",
+            "type": "Directory"
+          }
+        }]
+      }
+    }
+  }
+}
+'

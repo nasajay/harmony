@@ -1,0 +1,76 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: harmony
+#   labels:
+#     app: harmony
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: harmony
+#   template:
+#     metadata:
+#       labels:
+#         app: harmony
+#     spec:
+#       containers:
+#         - name: harmony
+#           imagePullPolicy: IfNotPresent
+#           image: harmony:latest
+#           command:
+#             - "/harmony/bin/start-harmony"
+#           volumeMounts:
+#               - mountPath: /harmony
+#                 name: store
+#           ports:
+#             - containerPort: 3000
+#             - containerPort: 4001
+#       volumes:
+#         - name: store
+#           hostPath:
+#             path: /Users/jnorton1/Harmony/harmony
+#             type: Directory
+apiVersion: v1
+kind: Pod
+metadata:
+  name: harmony
+  labels:
+    app: harmony
+spec:
+  containers:
+        - name: harmony
+          imagePullPolicy: IfNotPresent
+          image: harmony:latest
+          command:
+            - "/harmony/bin/start-harmony"
+          volumeMounts:
+              - mountPath: /harmony
+                name: store
+          ports:
+            - containerPort: 3000
+            - containerPort: 4001
+  volumes:
+    - name: store
+      hostPath:
+        path: /Users/jnorton1/Harmony/harmony
+        type: Directory
+      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: harmony
+  labels:
+    name: harmony
+spec:
+  ports:
+    - name: "frontend"
+      port: 3000
+      targetPort: 3000
+    - name: "backend"
+      port: 4001
+      targetPort: 4001
+  selector:
+    name: harmony
+  type: LoadBalancer
