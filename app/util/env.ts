@@ -75,7 +75,7 @@ function makeConfigVar(envName: string, defaultValue?: string | number): void {
 // create exported config variables
 [
   // ENV_VAR, DEFAULT_VALUE
-  ['ARGO_URL', 'http://localhost:4276'],
+  ['ARGO_URL', 'http://argo:2746'],
   ['LOG_LEVEL', 'debug'],
   ['STAGING_BUCKET', 'local-staging-bucket'],
   ['ARTIFACT_BUCKET', 'local-artifact-bucket'],

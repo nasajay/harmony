@@ -130,6 +130,7 @@ export default async function cmrGranuleLocator(
 
       const indexStr = `${i}`.padStart(5, '0');
       const artifactUrl = `${artifactPrefix}query${indexStr}.json`;
+      logger.info(`artifact url: ${artifactUrl}`);
       await defaultObjectStore().upload(JSON.stringify(cmrQuery), artifactUrl);
       operation.cmrQueryLocations.push(artifactUrl);
 

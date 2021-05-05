@@ -10,6 +10,7 @@
     "start": "ts-node -r tsconfig-paths/register app/server.ts",
     "start-dev": "ts-node-dev --no-notify -r tsconfig-paths/register --watch app/views --respawn app/server",
     "start-dev-fast": "TS_NODE_TRANSPILE_ONLY=true ts-node-dev --no-notify -r tsconfig-paths/register --respawn app/server",
+    "start-dev-debug-fast": "TS_NODE_TRANSPILE_ONLY=true ts-node-dev --inspect=9229 --no-notify -r tsconfig-paths/register --respawn app/server",
     "build-image": "docker build . -t harmony/query-cmr:${VERSION:-latest}",
     "push-image": "bin/push-image",
     "build": "tsc",
